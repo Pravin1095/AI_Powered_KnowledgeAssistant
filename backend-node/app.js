@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
+import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import resumeRouter from "./routes/resumeRouter.js";
 // const taskRouter=require('./routes/taskRouter')
@@ -8,11 +9,12 @@ import resumeRouter from "./routes/resumeRouter.js";
 
 
 const app = express()
+dotenv.config();
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const url='mongodb+srv://pravin1095:resumeAnalyzer@cluster0.3dpr3py.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const url=process.env.MONGO_URI;
 
 // app.use(cors({
 //   origin: "https://task-creator-opal.vercel.app",  // your Vercel frontend
