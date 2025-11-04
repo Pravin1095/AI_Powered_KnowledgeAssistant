@@ -1,11 +1,18 @@
-import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import dotenv from 'dotenv';
-import mongoose from "mongoose";
-import resumeRouter from "./routes/resumeRouter.js";
+// import express from "express";
+// import bodyParser from "body-parser";
+// import cors from "cors";
+// import dotenv from 'dotenv';
+// import mongoose from "mongoose";
+// import resumeRouter from "./routes/resumeRouter.js";
 // const taskRouter=require('./routes/taskRouter')
 // const authRouter = require('./routes/authRouter')
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const resumeRouter = require("./routes/resumeRouter");
 
 
 const app = express()

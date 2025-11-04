@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { Upload } from "lucide-react";
 import { Container, Card, Title, UploadLabel, FileName, HiddenInput, Button, JobDescInput, SubmitForm } from "./UploadPage.styles";
-
+import Loader from "../UI_Components/Loader";
 
 
 export default function UploadPage({ onUpload }) {
@@ -45,7 +45,7 @@ setFile(e.target.files[0]);
       for(let [key, value] of formData.entries()){
         console.log('check formData', key, value, formData.entries())
       }
-const res = await axios.post(`${url}`, formData)
+const res = await axios.post(`${url}`)
     }
     catch(err){
 
