@@ -1,6 +1,6 @@
 
 const multer = require('multer');  //Multer itself acts an a middleware
-const uuid = require('uuid')
+const { v4: uuidv4 } = require('uuid');
 
 const MIME_TYPE_MAP = {
   'application/pdf': 'pdf',
@@ -15,7 +15,7 @@ cb(null,'uploads/images')  //define the path were we need to store our files
         },
         filename : (req, file, cb)=>{
 const ext = MIME_TYPE_MAP[file.mimetype]  //multer gives the mimetype property and we can filter the extension that we want
-cb(null, uuid()+'.'+ext)  //This generates a random id name for our file with right extension
+cb(null, uuidv4()+'.'+ext)  //This generates a random id name for our file with right extension
         },
 
     fileFilter : (req, file, cb)=>{

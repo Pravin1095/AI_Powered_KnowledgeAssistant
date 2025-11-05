@@ -45,7 +45,7 @@ setFile(e.target.files[0]);
       for(let [key, value] of formData.entries()){
         console.log('check formData', key, value, formData.entries())
       }
-const res = await axios.post(`${url}`)
+const res = await axios.post(`${url}`,formData)
     }
     catch(err){
 
