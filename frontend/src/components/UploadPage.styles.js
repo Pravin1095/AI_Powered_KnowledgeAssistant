@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: row;
   ${'' /* align-items: center; */}
   justify-content: space-evenly;
-  height: 100vh;
+  height: 150vh;
   background: #f9fafb;
   padding: 1.5rem;
 `;
@@ -16,6 +16,7 @@ export const Card = styled.div`
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   width: 100%;
+  height : 100%;
   max-width: 480px;
 `;
 

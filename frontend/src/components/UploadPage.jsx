@@ -4,12 +4,15 @@ import axios from "axios";
 import { Upload } from "lucide-react";
 import { Container, Card, Title, UploadLabel, FileName, HiddenInput, Button, JobDescInput, SubmitForm } from "./UploadPage.styles";
 import Loader from "../UI_Components/Loader";
+import ScoreMeter from "../UI_Components/ScoreMeter";
 
 
 export default function UploadPage({ onUpload }) {
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const [jobDesc, setJobDesc] = useState('');
+  const [score, setSocre] = useState('');
+  const [feedback, setFeedback] = useState('');
 
 
   const url = 'http://localhost:8000/api/resume-upload'
@@ -46,6 +49,8 @@ setFile(e.target.files[0]);
         console.log('check formData', key, value, formData.entries())
       }
 const res = await axios.post(`${url}`,formData)
+setSocre(res?.data?.score)
+setFeedback(res?.data?.feedback)
     }
     catch(err){
 
@@ -56,6 +61,8 @@ const res = await axios.post(`${url}`,formData)
   const handleJobDesc = (e)=>{
 setJobDesc(e.target.value)
   }
+
+  console.log("check score", score)
 
   return (
     <Container>
@@ -79,10 +86,9 @@ setJobDesc(e.target.value)
            Submit
           </Button>
         </SubmitForm>
-      </Card>
-      {file && <Card>
-         
-             <div
+     
+        {
+          file && <div
             // onClick={() => window.open(previewUrl, "_blank")}
             style={{
               border: "1px solid #ccc",
@@ -99,7 +105,12 @@ setJobDesc(e.target.value)
               width="100%"
               height="100%"
             /></div>
-          
+        }
+      </Card>
+      {score && feedback && <Card>
+            {score && <ScoreMeter score={score} />}
+            {feedback && <div>{feedback}</div>}
+             
       </Card>}
     </Container>
   );

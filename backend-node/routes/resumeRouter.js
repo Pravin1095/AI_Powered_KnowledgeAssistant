@@ -70,7 +70,7 @@ Please provide:
   text = text.replace(/```json|```/g, '').trim();
 
 
-  console.log("check text", text, text.score, text.feedback)
+  console.log("check text", text)
   let output
 
   output = JSON.parse(text)
