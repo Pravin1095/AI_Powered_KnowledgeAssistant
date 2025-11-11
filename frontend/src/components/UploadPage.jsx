@@ -13,6 +13,7 @@ export default function UploadPage({ onUpload }) {
   const [jobDesc, setJobDesc] = useState('');
   const [score, setSocre] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [loader, setLoader] = useState(false);
 
 
   const url = 'http://localhost:8000/api/resume-upload'
@@ -48,12 +49,16 @@ setFile(e.target.files[0]);
       for(let [key, value] of formData.entries()){
         console.log('check formData', key, value, formData.entries())
       }
+      setLoader(true)
 const res = await axios.post(`${url}`,formData)
 setSocre(res?.data?.score)
 setFeedback(res?.data?.feedback)
     }
     catch(err){
 
+    }
+    finally{
+      setLoader(false);
     }
     
   };
@@ -66,6 +71,7 @@ setJobDesc(e.target.value)
 
   return (
     <Container>
+    {loader && <Loader />}
       <Card>
         <Title>📄 Upload a Document</Title>
         <SubmitForm onSubmit={handleSubmit}>
