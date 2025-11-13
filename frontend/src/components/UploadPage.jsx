@@ -32,7 +32,7 @@ fileReader.readAsDataURL(file)
   
   const handleFileChange = (e) => {
     console.log("check file change")
-    if(e.target.files && e.target.files.length==1){
+    if(e.target.files && e.target.files.length===1){
 setFile(e.target.files[0]);
     }
     
