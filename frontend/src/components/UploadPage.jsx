@@ -16,7 +16,7 @@ export default function UploadPage({ onUpload }) {
   const [loader, setLoader] = useState(false);
 
 
-  const url = 'http://localhost:8000/api/resume-upload'
+  const url = `${process.env.BACKEND_API_URL}/api/resume-upload`
   useEffect(()=>{
 if(!file){
   return
