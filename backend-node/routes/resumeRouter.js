@@ -4,6 +4,7 @@ const pdf = require('pdf-parse');
 const fs = require('fs').promises;
 const express = require('express');
 const dotenv = require("dotenv");
+const axios = require('axios');
 const {GoogleGenerativeAI} = require('@google/generative-ai');
 
 // const app = express();
@@ -24,9 +25,20 @@ resumeRouter.post('/',
         console.log("Multer uploaded", req.file, JD, process.env.GEMINI_API_KEY)
         console.timeEnd("File Uploaded")
 
+        const cloudUrl = req.file.path
+        let response;
+        try{
+ response = await axios.get(cloudUrl,{responseType:"arraybuffer"})
+        
+        }
+        catch(err){
+          console.log("Axios error", err)
+          res.status(500).json({message : "Cloudinary Error"})
+        }
+       const readPdf = Buffer.from(response.data)
         console.time("Read file")
-        const readPdf = await fs.readFile(req.file.path)
-        console.log('Buffer length:', readPdf.length);
+        // const readPdf = await fs.readFile(req.file.path)
+        // console.log('Buffer length:', readPdf.length);
         console.timeEnd("Read file")
 
         console.log("type of pdf", typeof pdf)
@@ -77,7 +89,7 @@ Please provide:
     res.status(200).json({score : output.score, feedback: output.feedback})
     }
     catch(err){
-        console.log("check err", err)
+        console.log("check err", err, req.file.path)
         res.status(400)
     }
    
