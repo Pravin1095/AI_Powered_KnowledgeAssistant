@@ -31,7 +31,6 @@ fileReader.readAsDataURL(file)
 
   
   const handleFileChange = (e) => {
-    console.log("check file change")
     if(e.target.files && e.target.files.length===1){
 setFile(e.target.files[0]);
     }
@@ -45,10 +44,9 @@ setFile(e.target.files[0]);
       const formData = new FormData(); //the FormData is a browser api so we no need to install any 3rd party. It is used to send files in binary format along with any JSOn values
       formData.append('JD', jobDesc)
       formData.append('resumefile', file)
-      console.log("check files",jobDesc, file)
-      for(let [key, value] of formData.entries()){
-        console.log('check formData', key, value, formData.entries())
-      }
+      // for(let [key, value] of formData.entries()){
+      //   console.log('check formData', key, value, formData.entries())
+      // }
       setLoader(true)
 const res = await axios.post(`${url}`,formData)
 setSocre(res?.data?.score)
@@ -67,8 +65,6 @@ setFeedback(res?.data?.feedback)
 setJobDesc(e.target.value)
   }
 
-  console.log("check score", score)
-
   return (
     <Container>
     {loader && <Loader />}
@@ -77,7 +73,7 @@ setJobDesc(e.target.value)
         <SubmitForm onSubmit={handleSubmit}>
           <UploadLabel>
             <Upload size={32} color="#6b7280" />
-            <FileName onClick={()=>console.log("check")}>{file ? "File uploaded successfully" : "Click to upload PDF/DOCX"}</FileName>
+            <FileName>{file ? "File uploaded successfully" : "Click to upload PDF/DOCX"}</FileName>
             <HiddenInput
               type="file"
               accept=".pdf,.docx,.txt"
